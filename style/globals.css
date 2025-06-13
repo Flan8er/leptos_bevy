@@ -49,24 +49,24 @@
 
     h3 {
         @apply font-light;
-        font-size: 18px;
+        font-size: 14px;
     }
 
     p,
     li,
     span {
-        font-size: 14px;
+        font-size: 12px;
         line-height: 1.5;
     }
 
     button {
-        font-size: 14px;
+        font-size: 12px;
         padding: 0.5rem 1rem;
     }
 
     input,
     textarea {
-        font-size: 14px;
+        font-size: 12px;
         padding: 0.5rem;
     }
 
@@ -78,35 +78,6 @@
     ::-moz-selection {
         background-color: hsl(var(--accent));
         color: hsl(var(--primary-text));
-    }
-}
-
-@media (min-resolution: 2dppx) {
-    h1 {
-        font-size: 42px;
-    }
-    h2 {
-        font-size: 36px;
-    }
-    h3 {
-        font-size: 32px;
-    }
-    p,
-    li,
-    span {
-        font-size: 20px; /* from 16px */
-        line-height: 1.6;
-    }
-    button {
-        font-size: 20px;
-    }
-    svg {
-        width: 1.5rem;
-        height: 1.5rem;
-    }
-    input,
-    textarea {
-        font-size: 20px;
     }
 }
 
