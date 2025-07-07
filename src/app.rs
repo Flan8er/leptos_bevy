@@ -5,6 +5,13 @@ use leptos_bevy_canvas::prelude::*;
 
 #[component]
 pub fn DummyPage() -> impl IntoView {
+    match window().document().unwrap().body() {
+        Some(body) => {
+            let _ = body.style().set_property("background", "none transparent");
+        }
+        None => (),
+    };
+
     view! {
         <BevyCanvas
             init=move || {
