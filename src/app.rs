@@ -4,15 +4,22 @@ use leptos::prelude::*;
 use leptos_bevy_canvas::prelude::*;
 
 #[component]
+pub fn DummyPage() -> impl IntoView {
+    view! {
+        <BevyCanvas
+            init=move || {
+                init_bevy_app()
+            }
+        />
+    }
+}
+
+#[component]
 pub fn App() -> impl IntoView {
     view! {
         <main class="w-screen h-screen flex items-center justify-center overflow-hidden">
             <div class="w-full h-full">
-                <BevyCanvas
-                    init=move || {
-                        init_bevy_app()
-                    }
-                />
+                <iframe class="m-0 p-0 w-full h-full" src="/bevy_window"/>
             </div>
         </main>
     }
