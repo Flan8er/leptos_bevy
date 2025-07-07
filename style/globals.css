@@ -35,7 +35,7 @@
         @apply border-border;
     }
     body {
-        @apply text-primary-text font-light; /* default was font-normal → 400 */
+        @apply text-primary-text font-light font-mono; /* default was font-normal → 400 */
         font-feature-settings:
             "rlig" 1,
             "calt" 1;
