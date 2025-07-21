@@ -1,4 +1,4 @@
-use bevy::prelude::*;
+use bevy::{asset::AssetMetaCheck, prelude::*};
 use bevy_panorbit_camera::{PanOrbitCamera, PanOrbitCameraPlugin};
 use leptos::prelude::*;
 use leptos_bevy_canvas::prelude::*;
@@ -39,22 +39,69 @@ struct Particle {
 
 fn init_bevy_app() -> App {
     let mut app = App::new();
-    app.add_plugins(DefaultPlugins.set(WindowPlugin {
-        primary_window: Some(Window {
-            canvas: Some("#bevy_canvas".into()),
-            transparent: true,
-            decorations: false,
-            fit_canvas_to_parent: true,
-            ..default()
-        }),
-        ..default()
-    }))
+    app.add_plugins(
+        DefaultPlugins
+            .set(WindowPlugin {
+                primary_window: Some(Window {
+                    canvas: Some("#bevy_canvas".into()),
+                    transparent: true,
+                    decorations: false,
+                    fit_canvas_to_parent: true,
+                    ..default()
+                }),
+                ..default()
+            })
+            .set(AssetPlugin {
+                meta_check: AssetMetaCheck::Never,
+                ..default()
+            }),
+    )
     .insert_resource(ClearColor(Color::NONE))
+    .init_resource::<SceneAssets>()
     .add_systems(Startup, (setup_ui, spawn_particles))
     .add_systems(Update, animate_sine_wave)
     .add_plugins(PanOrbitCameraPlugin);
+
     app
 }
+
+//
+//
+//
+// THIS IS A DEMO FOR LOADING AND SPAWNING ASSETS
+//
+//
+//
+#[derive(Resource, Debug, Default)]
+pub struct SceneAssets {
+    pub robot: Handle<Scene>,
+}
+
+pub fn load_assets(mut scene_assets: ResMut<SceneAssets>, asset_server: Res<AssetServer>) {
+    *scene_assets = SceneAssets {
+        robot: asset_server.load("6_axis_industrial_robot_arm.glb#Scene0"),
+    }
+}
+
+#[derive(Component)]
+pub struct Robot;
+
+pub fn spawn_robot(mut commands: Commands, scene_assets: Res<SceneAssets>) {
+    commands.spawn((
+        Robot,
+        SceneRoot(scene_assets.robot.clone()),
+        Transform {
+            ..Default::default()
+        },
+    ));
+}
+//
+//
+//
+// THIS IS A DEMO FOR LOADING AND SPAWNING ASSETS
+//
+//
+//
 
 fn setup_ui(mut commands: Commands) {
     commands.spawn((
