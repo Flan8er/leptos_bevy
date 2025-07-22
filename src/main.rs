@@ -1,7 +1,8 @@
 use leptos::prelude::*;
-mod app;
 
+mod app;
 use app::*;
+pub mod bevy_app;
 
 pub fn main() {
     console_error_panic_hook::set_once();
@@ -13,7 +14,7 @@ pub fn main() {
     if path.contains("bevy_window") {
         mount_to_body(move || {
             view! {
-                <DummyPage/>
+                <BevyApp/>
             }
         })
     } else {
