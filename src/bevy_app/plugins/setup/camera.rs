@@ -2,7 +2,6 @@ use bevy::prelude::*;
 use bevy_panorbit_camera::PanOrbitCamera;
 
 pub fn spawn_camera(mut commands: Commands) {
-    // Value is relative to the focus point
     let initial = Vec3::new(8.0, 4.0, 8.0);
     let radius = initial.length();
     let yaw = initial.x.atan2(initial.z);
@@ -11,7 +10,9 @@ pub fn spawn_camera(mut commands: Commands) {
     commands.spawn((
         Camera3d::default(),
         PanOrbitCamera {
+            // Set focal point (what the camera should look at)
             focus: Vec3::new(0.0, 2.0, 0.0),
+            // Set the starting position, relative to focus (overrides camera's transform).
             radius: Some(radius),
             yaw: Some(yaw),
             pitch: Some(pitch),
