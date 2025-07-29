@@ -37,9 +37,10 @@ module.exports = {
           "sans-serif",
         ],
         mono: [
+          "IBM Plex Mono",
+          "Menlo",
           "JetBrains Mono",
           "SFMono-Regular",
-          "Menlo",
           "Monaco",
           "Consolas",
           "Liberation Mono",
